@@ -5,7 +5,9 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        db.create_all()
+        from src.models import User, Task
+    db.create_all()
+
 
     app.register_blueprint(auth_routes, url_prefix="/auth")
     app.register_blueprint(task_routes, url_prefix="/tasks")

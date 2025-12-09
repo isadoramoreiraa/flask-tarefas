@@ -20,6 +20,22 @@ def register(data):
     return jsonify({"message": "Usuário registrado"}), 201
 
 
+
+def promote_user(data, current_user_id, is_admin):
+    if not is_admin:
+        return jsonify({"error": "Acesso negado"}), 403
+
+    username = data.get("username")
+    user = User.query.filter_by(username=username).first()
+
+    if not user:
+        return jsonify({"error": "Usuário não encontrado"}), 404
+
+    user.role = "admin"
+    db.session.commit()
+    return jsonify({"message": f"{username} agora é admin!"})
+
+
 def login(data):
     username = data.get("username")
     password = data.get("password")

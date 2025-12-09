@@ -12,10 +12,11 @@ def create_app():
 
     db.init_app(app)
 
+    
     with app.app_context():
-        from src.models import User, Task
-    db.create_all()
-
+        from src.models.user import User
+        from src.models.task import Task
+        db.create_all() 
 
     app.register_blueprint(auth_routes, url_prefix="/auth")
     app.register_blueprint(task_routes, url_prefix="/tasks")

@@ -1,3 +1,11 @@
+from flask import Flask
+from src.extensions import db
+from src.config import Config
+
+from src.routes.auth_routes import auth_routes
+from src.routes.task_routes import task_routes
+
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
